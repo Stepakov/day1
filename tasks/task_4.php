@@ -32,34 +32,77 @@
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content">
+
+                            <?php
+                                $statistic = [
+                                    [
+                                        'title' => 'My Tasks',
+                                        'currentValue' => 130,
+                                        'maxValue' => 500,
+                                        'units' => false,
+                                        'bg' => [
+                                            'color' => 'fusion',
+                                            'width' => 400
+                                        ]
+                                    ],
+                                    [
+                                        'title' => 'Transfered',
+                                        'currentValue' => 440,
+                                        'maxValue' => 1500,
+                                        'units' => 'TB',
+                                        'bg' => [
+                                            'color' => 'success',
+                                            'width' => 400
+                                        ]
+                                    ],
+                                    [
+                                        'title' => 'Bags Squashed',
+                                        'currentValue' => 77,
+                                        'maxValue' => 100,
+                                        'units' => '%',
+                                        'bg' => [
+                                            'color' => 'info',
+                                            'width' => 400
+                                        ]
+                                    ],
+                                    [
+                                        'title' => 'User Testing',
+                                        'currentValue' => 7,
+                                        'maxValue' => 8,
+                                        'units' => 'days',
+                                        'bg' => [
+                                            'color' => 'primary',
+                                            'width' => 400
+                                        ]
+                                    ],
+
+                                ];
+
+
+                                function getBG( $item )
+                                {
+                                    return 'bg-' . $item[ 'color' ] . '-' . $item[ 'width' ];
+                                }
+                            ?>
+
+                            <?php foreach( $statistic as $item ): ?>
                             <div class="d-flex mt-2">
                                 My Tasks
-                                <span class="d-inline-block ml-auto">130 / 500</span>
+                                <span class="d-inline-block ml-auto">
+                                    <?php
+                                        if( $item[ 'units' ] )
+                                            echo $item[ 'currentValue' ] . ' ' . $item[ 'units' ];
+                                        else
+                                            echo $item[ 'currentValue' ] . ' / ' . $item[ 'maxValue' ];
+                                        ?>
+                                </span>
                             </div>
                             <div class="progress progress-sm mb-3">
-                                <div class="progress-bar bg-fusion-400" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar <?= getBG( $item[ 'bg' ] ) ?>" role="progressbar" style="width: <?=  ( 100 / $item[ 'maxValue' ] ) * $item[ 'currentValue' ] ?>%;" aria-valuenow="<?=  ( 100 / $item[ 'maxValue' ] ) * $item[ 'currentValue' ] ?>" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <div class="d-flex">
-                                Transfered
-                                <span class="d-inline-block ml-auto">440 TB</span>
-                            </div>
-                            <div class="progress progress-sm mb-3">
-                                <div class="progress-bar bg-success-500" role="progressbar" style="width: 34%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex">
-                                Bugs Squashed
-                                <span class="d-inline-block ml-auto">77%</span>
-                            </div>
-                            <div class="progress progress-sm mb-3">
-                                <div class="progress-bar bg-info-400" role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex">
-                                User Testing
-                                <span class="d-inline-block ml-auto">7 days</span>
-                            </div>
-                            <div class="progress progress-sm mb-g">
-                                <div class="progress-bar bg-primary-300" role="progressbar" style="width: 84%;" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <?php endforeach; ?>
+
+
                         </div>
                     </div>
                 </div>

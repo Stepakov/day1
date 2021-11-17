@@ -47,50 +47,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                    $db = new PDO( 'mysql:host=localhost;dbname=mini_course', 'root', '' );
+                                    $db->exec( 'SET NAMES UTF8' );
+                                    $sql = "SELECT * FROM people";
+                                    $res = $db->prepare( $sql );
+                                    $res->execute();
+
+                                    $people = $res->fetchAll(PDO::FETCH_ASSOC);
+
+//                                    echo "<pre>";
+//                                    print_r( $people );
+//                                    echo "</pre>";
+                                    ?>
+                                    <?php foreach( $people as $someone ): ?>
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td><?= $someone[ 'first_name' ] ?></td>
+                                            <td><?= $someone[ 'last_name' ] ?></td>
+                                            <td><?= $someone[ 'username' ] ?></td>
                                             <td>
-                                                <a href="show.php?id=" class="btn btn-info">Редактировать</a>
-                                                <a href="edit.php?id=" class="btn btn-warning">Изменить</a>
-                                                <a href="delete.php?id=" class="btn btn-danger">Удалить</a>
+                                                <a href="show.php?id=<?= $someone[ 'id' ] ?>" class="btn btn-info">Редактировать</a>
+                                                <a href="edit.php?id=<?= $someone[ 'id' ] ?>" class="btn btn-warning">Изменить</a>
+                                                <a href="delete.php?id=<?= $someone[ 'id' ] ?>" class="btn btn-danger">Удалить</a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                            <td>
-                                                <a href="show.php?id=" class="btn btn-info">Редактировать</a>
-                                                <a href="edit.php?id=" class="btn btn-warning">Изменить</a>
-                                                <a href="delete.php?id=" class="btn btn-danger">Удалить</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                            <td>
-                                                <a href="show.php?id=" class="btn btn-info">Редактировать</a>
-                                                <a href="edit.php?id=" class="btn btn-warning">Изменить</a>
-                                                <a href="delete.php?id=" class="btn btn-danger">Удалить</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4</th>
-                                            <td>Larry the Bird</td>
-                                            <td> Bird</td>
-                                            <td>@twitter</td>
-                                            <td>
-                                                <a href="show.php?id=" class="btn btn-info">Редактировать</a>
-                                                <a href="edit.php?id=" class="btn btn-warning">Изменить</a>
-                                                <a href="delete.php?id=" class="btn btn-danger">Удалить</a>
-                                            </td>
-                                        </tr>
+                                    <?php endforeach; ?>
+
                                     </tbody>
                                 </table>
                             </div>

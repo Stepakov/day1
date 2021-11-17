@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +38,21 @@
                 <div class="panel-content">
                     <div class="panel-content">
                         <div class="form-group">
+                            <?php
+//                                print_r( $_SESSION );
+                                if( isset( $_SESSION[ 'success' ] ) )
+                                {
+                                    echo "<div class='alert alert-success'>" . $_SESSION[ 'success' ] . "</div>";
+                                    unset( $_SESSION[ 'success' ] );
+                                }
+
+                                elseif( isset( $_SESSION[ 'error' ] ) )
+                                {
+                                    echo "<div class='alert alert-error'>" . $_SESSION[ 'error' ] . "</div>";
+                                    unset( $_SESSION[ 'error' ] );
+                                }
+
+                            ?>
                             <form action="insert.php" method="POST">
                                 <label class="form-label" for="simpleinput">Text</label>
                                 <input type="text" id="simpleinput" class="form-control" name="content">
