@@ -1,7 +1,6 @@
 <?php
     session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,36 +37,12 @@
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <?php if( isset( $_SESSION[ 'error' ] ) ): ?>
-                                    <div class="alert alert-danger fade show" role="alert">
-                                        Неверный логин или пароль
-                                        <br>
-                                        <?= $_SESSION[ 'error' ] ?>
-                                        <?php unset( $_SESSION[ 'error' ] ) ?>
+                                    <?php if( isset( $_SESSION[ 'user' ] ) ): ?>
+                                    <div class="alert alert-success fade show" role="alert">
+                                        Здравствуйте, <?= $_SESSION[ 'user' ][ 'email' ] ?>
                                     </div>
-                                    <?php elseif( isset( $_SESSION[ 'success' ] ) ): ?>
-                                        <div class="alert alert-success fade show" role="alert">
-                                            <?= $_SESSION[ 'success' ] ?>
-                                            <br>
-                                            <?= $_SESSION[ 'user' ][ 'email' ] ?>
-                                            <?php unset( $_SESSION[ 'success' ] ) ?>
-                                        </div>
-                                    <?php elseif( isset( $_SESSION[ 'user' ] ) ): ?>
-                                        <div class="alert alert-success fade show" role="alert">
-                                            <?= $_SESSION[ 'user' ][ 'email' ] ?>
-                                        </div>
                                     <?php endif; ?>
-                                    <form action="task_14_handler.php" method="POST">
-                                        <div class="form-group">
-                                        	<label class="form-label" for="simpleinput">Email</label>
-                                        <input type="text" id="simpleinput" class="form-control" name="email">
-                                        </div>
-
-                                        <label class="form-label" for="simpleinput">Password</label>
-                                        <input type="password" id="simpleinput" class="form-control" name="password">
-                                        <button class="btn btn-success mt-3">Submit</button>
-                                        <a href="task_14_1.php" class="btn btn-danger mt-3">Exit</a>
-                                    </form>
+                                    <a href="task_14_1_handler.php" class="btn btn-info">Выйти</a>
                                 </div>
                             </div>
                         </div>
